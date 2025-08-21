@@ -1,0 +1,36 @@
+{
+  "name": "taskpro-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.7",
+    "@radix-ui/react-dialog": "^1.1.14",
+    "formik": "^2.4.6",
+    "framer-motion": "^12.23.12",
+    "js-cookie": "^3.0.5",
+    "nanoid": "^5.1.5",
+    "next": "15.4.2",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-icons": "^5.5.0",
+    "tailwind-scrollbar": "^4.0.2",
+    "yup": "^1.6.1",
+    "zustand": "^5.0.7"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@svgr/webpack": "^8.1.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/js-cookie": "^3.0.6",
+    "eslint": "^9",
+    "eslint-config-next": "15.4.2",
+    "next-themes": "^0.4.6",
+    "tailwindcss": "^4"
+  }
+}

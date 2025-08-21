@@ -1,0 +1,103 @@
+@import "tailwindcss";
+html {
+font-size: 16px;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.board-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.board-scroll::-webkit-scrollbar-thumb {
+  background: #BEDBB0;
+  border-radius: 4px;
+}
+.board-scroll::-webkit-scrollbar-track {
+  background: #232323;
+}
+.board-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #BEDBB0 #232323;
+}
+
+html.dark {
+  --main-bg: #1F1F1F;
+  --header-bg: #161616;
+  --sidebar-bg: #121212;
+  /* Add Board Section */
+  --add-board-bg: #BEDBB0;
+  --add-board-bg-hover: #9DC888;
+  --add-board-icon: #121212;
+  /* Logo */
+  --logo-icon: #FFF;
+  --logo-bg: #1F1F1F;
+  --logo-text: #fff;
+  /* Active Board */
+  --active-board-bg: #BEDBB0;
+  /* Log Out */
+  --logOut-hover: #9DC888;
+  /* Links and Text */
+
+  --link: #BEDBB0;
+  --secondary-link: #fff;
+  --text: #fff;
+  --secondary-text: rgba(255, 255, 255, 0.5);
+}
+html.light {
+  --main-bg: #F6F6F7;
+  --header-bg: #FCFCFC;
+  --sidebar-bg: #fff;
+  /* Add Board Section */
+  --add-board-bg: #BEDBB0;
+  --add-board-bg-hover: #9DC888;
+  --add-board-icon: #121212;
+  /* Logo */
+  --logo-icon: #FFF;
+  --logo-bg: #1F1F1F;
+  --logo-text: #161616;
+    /* Active Board */
+  --active-board-bg: #BEDBB0;
+    /* Log Out */
+  --logOut-hover: #9DC888;
+  /* Links and Text */
+  --link: #BEDBB0;
+  --secondary-link: #161616;
+  --text: #161616;
+  --secondary-text: rgba(22, 22, 22, 0.7);
+}
+html.violet {
+  --main-bg: #B8BCFD;
+  --header-bg: #FFF;
+  --sidebar-bg: #5255BC;
+  /* Add Board Section */
+  --add-board-bg: #B8BCFD;
+  --add-board-bg-hover: #979CEA;
+  --add-board-icon: #fff;
+  /* Logo */
+  --logo-icon: #5255BC;
+  --logo-bg: #ECEDFD;
+  --logo-text: #fff;
+    /* Active Board */
+  --active-board-bg: #fff;
+  /* Log Out */
+  --logOut-hover: #B8BCFD;
+  /* Links and Text */
+  --link: #5255BC;
+  --secondary-link: #fff;
+  --text: #fff;
+  --secondary-text: rgba(22, 22, 22, 0.7);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+  

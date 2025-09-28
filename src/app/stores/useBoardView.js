@@ -3,7 +3,6 @@ import { useColumnsStore } from '@/app/stores/columnStore';
 import { useCardsStore } from '@/app/stores/cardStore';
 
 export function useBoardView(boardId) {
-  const board = useBoardsStore(s =>(s.boards.find(b => b.id.toString() === boardId)));
   const board = useBoardsStore(s => (s.boards.find(b => b.id.toString() === boardId)));
   const cards = useCardsStore(s => s.cards);
   if (!board) return null;

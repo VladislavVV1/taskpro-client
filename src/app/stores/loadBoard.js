@@ -25,7 +25,7 @@ const getBoard = async (id) => {
     }
 
     const boardData = await response.json();
-  // Loaded board data can be handled here if needed for debugging or logging
+    return boardData;
   } catch (error) {
     console.error('Error loading board:', error.message || error);
     throw error;

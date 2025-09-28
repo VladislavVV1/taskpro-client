@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "taskpro-backend-74ub.onrender.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -8,6 +18,5 @@ const nextConfig = {
     return config;
   },
 };
+
 export default nextConfig;
-
-

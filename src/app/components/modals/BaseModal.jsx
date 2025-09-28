@@ -24,7 +24,7 @@ export default function BaseModal({ open, onClose, children }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center"
+      className="fixed inset-0 z-50 flex items-center justify-center px-[5px]"
       onClick={onClose} // outside click
     >
       {/* Overlay */}
@@ -43,7 +43,7 @@ export default function BaseModal({ open, onClose, children }) {
         transition={{ duration: 0.2 }}
         onClick={(e) => e.stopPropagation()}
         className="relative z-10 bg-[var(--main-bg)] text-[var(--text)]
-                    rounded-xl shadow-xl w-[350px] max-w-[90%]"
+                    rounded-xl shadow-xl w-[335px] sm:w-[350px]"
       >
         {children}
       </motion.div>

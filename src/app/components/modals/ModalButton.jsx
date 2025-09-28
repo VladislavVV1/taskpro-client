@@ -20,8 +20,8 @@ export default function Button({
       // Base styles for the button
       className="
         flex w-full h-[49px] items-center justify-center gap-2 
-        rounded-lg bg-[#BEDBB0] font-medium text-[#161616]
-        transition-colors hover:bg-[#9DC888] 
+        rounded-lg bg-[var(--modal-button-bg)] font-medium text-[var(--modal-button-text)]
+        transition-colors hover:bg-[var(--modal-button-bg-hover)] 
         disabled:bg-gray-500 disabled:text-white disabled:cursor-not-allowed
       "
       // Animation from framer-motion
@@ -29,8 +29,8 @@ export default function Button({
       transition={{ duration: 0.1 }}
     >
       {/* Icon Wrapper */}
-      <span className="flex h-7 w-7 items-center justify-center rounded-md bg-[#161616]">
-        <IconComponent className="h-5 w-5 text-white" />
+      <span className="flex h-7 w-7 items-center justify-center rounded-md bg-[var(--modal-button-icon-bg)]">
+        <IconComponent className="h-5 w-5 text-[var(--modal-button-icon)]" />
       </span>
 
       {/* Text */}

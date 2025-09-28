@@ -8,11 +8,18 @@ export const useColumnsStore = create(
       columns: [], // [{ id, name, cards: [cardId, ...] }]
       isLoaded: false,
 
-      loadColumns: () => {
-        console.log('Loading columns...');
-        if (get().isLoaded) return;
-        set({ columns: mockColumns, isLoaded: true });
-      },
+        loadColumns: (columns) => {
+          if (!columns) {
+            return;
+          }
+          const prevColumns = get().columns;
+          // Check if any column already exists by id
+          const newColumns = columns.filter(col => !prevColumns.some(prev => prev.id === col.id));
+          if (newColumns.length === 0) {
+            return; // All columns already exist
+          }
+          set({ columns: [...prevColumns, ...newColumns] });
+        },
 
       addColumn: (column) =>
         set((s) => ({ columns: [...s.columns, { ...column, cards: column.cards ?? [] }] })),

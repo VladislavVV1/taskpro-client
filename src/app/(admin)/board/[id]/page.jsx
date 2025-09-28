@@ -11,24 +11,41 @@ import { useModal } from "@/app/components/modals/ModalContext";
 import ColumnItem from "@/app/components/ColumnItem";
 import Card from "@/app/components/CardItem";
 import AddCardButton from "@/app/components/AddCardButton";
+import { loadBoard } from "@/app/stores/loadBoard";
+import { AddNewColumn } from "@/app/lib/apiAddNewColumn";
+import { EditColumn } from "@/app/lib/apiEditColumn";
+import { DeleteColumn } from "@/app/lib/apiDeleteColumn";
+import { AddNewCard } from "@/app/lib/apiAddNewCard";
+import { EditCard } from "@/app/lib/apiEditCard"; // Not used currently
+import { DeleteCard } from "@/app/lib/apiDeleteCard"; 
+
+
+const formatDate = (dateString) => {
+  return new Date(dateString).toISOString().slice(0, 10);
+}
 
 export default function BoardPage() {
-  useEffect(() => {
-    useColumnsStore.getState().loadColumns();
-    useCardsStore.getState().loadCards();
-  }, []);
-  
   const pathname = usePathname();
   const currentBoardId = pathname.split('/').pop();
   const board = useBoardView(currentBoardId);
   const openModal = useModal().openModal;
   const editColumn = useColumnsStore.getState().editColumn;
+
+  useEffect(() => {
+    loadBoard(currentBoardId);
+    useColumnsStore.getState().loadColumns();
+    useCardsStore.getState().loadCards();
+  }, []);
+
   const editCard = useCardsStore.getState().editCard;
   const priority = useSearchParams().get('priority') || 'Low';
+  
   const handleAddColumn = () => {
     openModal('AddNewColumn', {
       onSubmit: (values) => {
-        const columnId = createColumnOnBoard(currentBoardId, { name: values.title });
+        AddNewColumn(currentBoardId, { name: values.title }).then(newColumn => {
+          createColumnOnBoard(currentBoardId, newColumn.id, { name: newColumn.name });
+        });
       }
     });
   }
@@ -37,7 +54,9 @@ export default function BoardPage() {
     openModal('EditColumn', {
       onSubmit: (values) => {
         // Call the API to update the column
-        editColumn(columnId, { name: values.title });  
+        EditColumn(columnId, { name: values.title }).then((newColumn) => {
+          editColumn(newColumn.id, { name: newColumn.name });
+        });
       },
       initialValues: { title: columnName },
     });
@@ -47,8 +66,9 @@ export default function BoardPage() {
     openModal('ConfirmDelete', {
       onConfirm: () => {
         // Call the API to delete the column
-        deleteColumnFromBoard(currentBoardId, columnId, { cascadeCards: true });
-        console.log('Column deleted:', columnId);
+        DeleteColumn(columnId).then(() => {
+          deleteColumnFromBoard(currentBoardId, columnId, { cascadeCards: true });
+        });
       },
       resourceName: columnName
     });
@@ -58,18 +78,20 @@ export default function BoardPage() {
     openModal('AddNewCard', {
       onSubmit: (values) => {
         // Call the API to create the card
-        const priority = values.priority || 'Without';
-        const deadline = values.deadline || 'NONE';
-        const cardId = createCardInColumn(columnId, { title: values.title, description: values.description, priority, deadline });
+        AddNewCard(columnId, { name: values.title, description: values.description, status: values.priority, deadline: formatDate(values.deadline) }).then(newCard => {
+          createCardInColumn(columnId, { id: newCard.id, title: newCard.name, description: newCard.description, priority: newCard.priority, deadline: newCard.deadline });
+        });
       }
     });
   }
 
   const handleCardDelete = (columnId, cardId) => {
     openModal('ConfirmDelete', {
-      onConfirm: () => {
-        // Call the API to delete the card
-        deleteCardFromColumn(columnId, cardId);
+      onConfirm: async () => {
+        const response = await DeleteCard(cardId);
+        if (response.result) {
+          deleteCardFromColumn(columnId, cardId);
+        }
       },
       resourceName: 'card'
     });
@@ -81,8 +103,9 @@ export default function BoardPage() {
 
     openModal('EditCard', {
       onSubmit: (values) => {
-        // Call the API to update the card
-        editCard(cardId, { title: values.title, description: values.description, priority: values.priority, deadline: values.deadline });
+        EditCard(cardId, { name: values.title, description: values.description, status: values.priority, deadline: formatDate(values.deadline) }).then((updatedCard) => {
+          editCard(cardId, updatedCard);
+        });
       },
       initialValues: { title: card.title, description: card.description, priority: card.priority, deadline: card.deadline },
     });
@@ -91,7 +114,13 @@ export default function BoardPage() {
   const filterCardsByPriority = (cards, priority) => {
 
   if (priority === 'ALL') return cards;
-  return cards.filter(card => card.priority.toUpperCase() === priority.toUpperCase());
+if (!cards || !Array.isArray(cards)) return [];
+const filtered = cards.filter(card => {
+  if (!card || !card.priority) return false;
+  return card.priority.toUpperCase() === priority.toUpperCase();
+});
+
+  return filtered;
 }
 
   if (!board) {
@@ -102,10 +131,22 @@ export default function BoardPage() {
   }
   return (
 
-    <div>
-      <h1 className="text-[18px] mb-[10px]">{board.name}</h1>
+    <div
+      className="background-img min-h-screen pt-[10px] pb-[10px] pr-[18px] pl-[18px]"
+      style={
+        board.background !== 'default'
+          ? {
+              backgroundImage: `url(/background-pc/${board.background}.webp)`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+            }
+          : undefined
+      }
+    >
+      <h1 className="text-[14px] sm:text-[18px] text-[var(--profile-title)] font-medium mb-[10px]">{board.name}</h1>
       {/* Render columns and add column button */}
-      <div className="flex gap-[18px]">
+      <div className="flex gap-[18px] overflow-x-auto max-h-[calc(100vh-115px)] h-full card-scroll ">
       {board.columns.length !== 0 ? (
         <ul className="flex gap-[18px]">
           {board.columns.map(column => (
@@ -117,8 +158,8 @@ export default function BoardPage() {
                 onDelete={() => handleColumnDelete(column.id, column.name)}
               />
               {column.cards.length > 0 && (
-                <div className="mt-[10px] mb-[14px] overflow-hidden max-h-[calc(100vh-270px)] overflow-y-auto gap-[10px]">
-                  <div className="flex flex-col flex-wrap gap-[18px] mt-[10px]">
+                <div className="overflow-hidden max-h-[calc(100vh-280px)] overflow-y-auto card-scroll gap-[10px]">
+                  <div className="flex flex-col flex-wrap ">
                       {filterCardsByPriority(column.cards, priority).map(card => (
                         <Card 
                           key={card.id}

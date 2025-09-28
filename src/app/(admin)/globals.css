@@ -1,103 +1,330 @@
 @import "tailwindcss";
+@import '../components/calendar.css';
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-sm: 24rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 90rem;
+}
+
 html {
 font-size: 16px;
 }
-body {
-  font-family: 'Poppins', sans-serif;
-}
 
-.board-scroll::-webkit-scrollbar {
-  width: 6px;
+/* .board-scroll::-webkit-scrollbar {
+  display: none;
 }
 .board-scroll::-webkit-scrollbar-thumb {
-  background: #BEDBB0;
-  border-radius: 4px;
+  display: none;
 }
 .board-scroll::-webkit-scrollbar-track {
-  background: #232323;
-}
-.board-scroll {
-  scrollbar-width: thin;
-  scrollbar-color: #BEDBB0 #232323;
+  display: none;
+} */
+
+::-webkit-scrollbar-button {
+  display: none;
 }
 
-html.dark {
-  --main-bg: #1F1F1F;
-  --header-bg: #161616;
-  --sidebar-bg: #121212;
-  /* Add Board Section */
-  --add-board-bg: #BEDBB0;
-  --add-board-bg-hover: #9DC888;
-  --add-board-icon: #121212;
-  /* Logo */
-  --logo-icon: #FFF;
-  --logo-bg: #1F1F1F;
-  --logo-text: #fff;
-  /* Active Board */
-  --active-board-bg: #BEDBB0;
-  /* Log Out */
-  --logOut-hover: #9DC888;
-  /* Links and Text */
-
-  --link: #BEDBB0;
-  --secondary-link: #fff;
-  --text: #fff;
-  --secondary-text: rgba(255, 255, 255, 0.5);
+.card-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 10px;
+  background: transparent;
 }
-html.light {
-  --main-bg: #F6F6F7;
-  --header-bg: #FCFCFC;
-  --sidebar-bg: #fff;
-  /* Add Board Section */
-  --add-board-bg: #BEDBB0;
-  --add-board-bg-hover: #9DC888;
-  --add-board-icon: #121212;
-  /* Logo */
-  --logo-icon: #FFF;
-  --logo-bg: #1F1F1F;
-  --logo-text: #161616;
+
+.card-scroll::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+  width: 4px;
+  border-radius: 4px;
+}
+
+  :root {
+    --main-dark: #151515;
+    --main-dark-text: #161616;
+    --main-light: #FCFCFC;
+    --white: #FFFFFF;
+    --light-green: #BEDBB0;
+    --green: #9DC888;
+    --violet: #5255BC;
+    --light-violet: #B8BCFD;
+  }
+
+  html.dark {
+    --main-bg: #1F1F1F;
+    --header-bg: var(--main-dark-text);
+    --sidebar-bg: #121212;
+    --selected-board-bg: #1F1F1F;
+    --need-help-bg: #1F1F1F;
+    /* Add Board Section */
+    --add-board-bg: var(--light-green);
+    --add-board-bg-hover: var(--green);
+    --add-board-icon: #121212;
+    /* Logo */
+    --logo-icon: var(--white);
+    --logo-bg: #1F1F1F;
+    --logo-text: var(--white);
+    /* Profile */
+    --profile-title: var(--white);
+    --profile-logo: #1F1F1F;
+    --profile-logo-icon: var(--main-dark);
     /* Active Board */
-  --active-board-bg: #BEDBB0;
+    --active-board-bg: var(--light-green);
     /* Log Out */
-  --logOut-hover: #9DC888;
-  /* Links and Text */
-  --link: #BEDBB0;
-  --secondary-link: #161616;
-  --text: #161616;
-  --secondary-text: rgba(22, 22, 22, 0.7);
-}
-html.violet {
-  --main-bg: #B8BCFD;
-  --header-bg: #FFF;
-  --sidebar-bg: #5255BC;
-  /* Add Board Section */
-  --add-board-bg: #B8BCFD;
-  --add-board-bg-hover: #979CEA;
-  --add-board-icon: #fff;
-  /* Logo */
-  --logo-icon: #5255BC;
-  --logo-bg: #ECEDFD;
-  --logo-text: #fff;
+    --logOut-hover: var(--green);
+    /* Links and Text */
+    --link: var(--light-green);
+    --secondary-link: var(--white);
+    --text: var(--white);
+    --secondary-text: rgba(255, 255, 255, 0.5);
+    --priority-without: rgba(255, 255, 255, 0.3);
+    /* Theme Toggle */
+    --theme-text: var(--white);
+    --theme-option-text: rgba(255, 255, 255, 0.5);
+    --theme-border: var(--light-green);
+    --theme-background: var(--main-dark);
+    --theme-hover: var(--white);
+    /* Modal */
+    --modal-bg: var(--main-dark);
+    --modal-border: var(--light-green);
+    --modal-title: var(--white);
+    --modal-input-border: var(--light-green);
+    --modal-input-text: rgba(255, 255, 255, 0.5);
+    --modal-close: var(--white);
+    --modal-close-hover: rgba(255, 255, 255, 0.5);
+    --modal-icons: rgba(255, 255, 255, 0.5);
+    --modal-icon-hover: var(--light-green);
+    --modal-button-bg: var(--light-green);
+    --modal-button-bg-hover: var(--green);
+    --modal-button-text: var(--main-dark-text);
+    --modal-button-icon-bg: var(--main-dark-text);
+    --modal-button-icon: var(--white);
+    --modal-avatar-icon-bg: #ECEDFD;
+    --modal-avatar-icon: var(--main-dark-text);
+    /* Calendar */
+    --calendar-bg: #1F1F1F;
+    --calendar-active: var(--light-green);
+    --calendar-text: var(--white);
+    --calendar-hover: rgba(255, 255, 255, 0.1);
+    --calendar-active-text: var(--main-dark-text);
+    --calendar-disabled: var(--white);
+    /* Column */
+    --column-bg: #121212;
+    --column-text: var(--white);
+    --column-icon: var(--white);
+    --column-icon-hover: var(--light-green);
+        /* Add Column button */
+    --add-column-bg: #121212;
+    --add-column-text: var(--white);
+    --add-column-hover: var(--light-green);
+    --add-column-icon-bg: var(--white);
+    --add-column-icon: #121212;
+    /* Cards */
+    --card-bg: #121212;
+    --card-text: var(--white);
+    --card-icon: var(--white);
+    --card-icon-hover: var(--light-green);
+    /* Add card button */
+    --add-card-bg: var(--light-green);
+    --add-card-text: var(--main-dark-text);
+    --add-card-hover: var(--green);
+    --add-card-icon-bg: var(--main-dark-text);
+    --add-card-icon: var(--white);
+    /* Scroll */
+    --scroll-thumb: rgba(256, 256, 256, 0.1);
+        /* Filter */
+    --filter-bg: var(--main-dark);
+    --filter-border: rgba(190, 219, 176, 0.5);
+    --filter-title: var(--white);
+    --filter-option: var(--white);
+    --filter-icon: var(--white);
+  }
+  html.light {
+    --main-bg: #F6F6F7;
+    --header-bg: var(--main-light);
+    --sidebar-bg: var(--white);
+    --selected-board-bg: #F6F6F7;
+    --need-help-bg: #F6F6F7;
+    /* Add Board Section */
+    --add-board-bg: var(--light-green);
+    --add-board-bg-hover: var(--green);
+    --add-board-icon: #121212;
+    /* Logo */
+    --logo-icon: var(--white);
+    --logo-bg: #1F1F1F;
+    --logo-text: var(--main-dark-text);
+        /* Profile */
+    --profile-title: var(--main-dark-text);
+    --profile-logo: #F6F6F7;
+    --profile-logo-icon: var(--white);
     /* Active Board */
-  --active-board-bg: #fff;
-  /* Log Out */
-  --logOut-hover: #B8BCFD;
-  /* Links and Text */
-  --link: #5255BC;
-  --secondary-link: #fff;
-  --text: #fff;
-  --secondary-text: rgba(22, 22, 22, 0.7);
-}
+    --active-board-bg: var(--light-green);
+    /* Log Out */
+    --logOut-hover: var(--green);
+    /* Links and Text */
+    --link: var(--light-green);
+    --secondary-link: var(--main-dark-text);
+    --text: var(--main-dark-text);
+    --secondary-text: rgba(22, 22, 22, 0.7);
+    --priority-without: rgba(22, 22, 22, 0.3);
+    /* Theme Toggle */
+    --theme-text: var(--main-dark-text);
+    --theme-option-text: rgba(22, 22, 22, 1);
+    --theme-background: var(--main-light);
+    --theme-border: var(--light-green);
+    --theme-hover: #1A1A1A;
+    /* Modal */
+    --modal-bg: var(--main-light);
+    --modal-border: var(--main-light);
+    --modal-title: var(--main-dark-text);
+    --modal-input-border: var(--light-green);
+    --modal-input-text: rgba(255, 255, 255, 0.5);
+    --modal-close: var(--main-dark-text);
+    --modal-close-hover: rgba(22, 22, 22, 0.7);
+    --modal-icons: rgba(22, 22, 22, 0.5);
+    --modal-icon-hover: var(--light-green);
+    --modal-button-bg: var(--light-green);
+    --modal-button-bg-hover: var(--green);
+    --modal-button-text: var(--main-dark-text);
+    --modal-button-icon-bg: var(--main-dark-text);
+    --modal-button-icon: var(--white);
+        --modal-avatar-icon-bg: var(--light-green);
+    --modal-avatar-icon: var(--main-dark-text);
+    /* Calendar */
+    --calendar-bg: var(--white);
+    --calendar-active: var(--light-green);
+    --calendar-text: var(--main-dark-text);
+    --calendar-hover: rgba(22, 22, 22, 0.1);
+    --calendar-active-text: var(--main-dark-text);
+    --calendar-disabled: var(--main-dark-text);
+    /* Column */
+    --column-bg: var(--white);
+    --column-text: var(--main-dark-text);
+    --column-icon: var(--main-dark-text);
+    --column-icon-hover: var(--light-green);
+    /* Add Column button */
+    --add-column-bg: var(--white);
+    --add-column-text: var(--main-dark-text);
+    --add-column-hover: var(--light-green);
+    --add-column-icon-bg: var(--main-dark-text);
+    --add-column-icon: var(--white);
+    /* Cards */
+    --card-bg: var(--white);
+    --card-text: var(--main-dark-text);
+    --card-icon: var(--main-dark-text);
+    --card-icon-hover: var(--light-green);
+    /* Add card button */
+    --add-card-bg: var(--light-green);
+    --add-card-text: var(--main-dark-text);
+    --add-card-hover: var(--green);
+    --add-card-icon-bg: var(--main-dark-text);
+    --add-card-icon: var(--white);
+        /* Scroll */
+    --scroll-thumb: #E8E8E8;
+    /* Filter */
+    --filter-bg: #FCFCFC;
+    --filter-border: #FCFCFC;
+    --filter-title: var(--main-dark-text);
+    --filter-option: var(--main-dark-text);
+    --filter-icon: var(--main-dark-text);
+  }
+  html.violet {
+    --main-bg: #ECEDFD;
+    --header-bg: var(--white);
+    --sidebar-bg: var(--violet);
+    /* Add Board Section */
+    --add-board-bg: var(--light-violet);
+    --add-board-bg-hover: #979CEA;
+    --add-board-icon: var(--white);
+    --selected-board-bg: rgba(255, 255, 255, 0.5);
+    --need-help-bg: rgba(236, 237, 253, 0.4);
+    /* Logo */
+    --logo-icon: var(--violet);
+    --logo-bg: #ECEDFD;
+    --logo-text: var(--white);
+        /* Profile */
+    --profile-title: var(--main-dark-text);
+    --profile-logo: #ECEDFD;
+    --profile-logo-icon: var(--white);
+    /* Active Board */
+    --active-board-bg: var(--white);
+    /* Log Out */
+    --logOut-hover: var(--light-violet);
+    /* Links and Text */
+    --link: var(--violet);
+    --secondary-link: var(--white);
+    --text: var(--white);
+    --secondary-text: rgba(22, 22, 22, 0.7);
+    --priority-without: rgba(22, 22, 22, 0.3);
+    /* Theme Toggle */
+    --theme-text: var(--main-dark-text);
+    --theme-option-text: rgba(22, 22, 22, 1);
+    --theme-background: var(--main-light);
+    --theme-border: #ECEDFD;
+    --theme-hover: #1A1A1A;
+    /* Modal */
+    --modal-bg: var(--main-light);
+    --modal-border: var(--main-light);
+    --modal-title: var(--main-dark-text);
+    --modal-input-border: var(--violet);
+    --modal-input-text: rgba(255, 255, 255, 0.5);
+    --modal-close: var(--main-dark-text);
+    --modal-close-hover: rgba(22, 22, 22, 0.5);
+    --modal-icons: rgba(22, 22, 22, 0.5);
+    --modal-icon-hover: var(--light-violet);
+    --modal-button-bg: var(--violet);
+    --modal-button-bg-hover: #3c3e90;
+    --modal-button-text: var(--white);
+    --modal-button-icon-bg: var(--white);
+    --modal-button-icon: var(--main-dark-text);
+    --modal-avatar-icon-bg: #ECEDFD;
+    --modal-avatar-icon: var(--main-dark-text);
+    /* Calendar */
+    --calendar-bg: var(--white);
+    --calendar-active: var(--violet);
+    --calendar-text: var(--main-dark-text);
+    --calendar-hover: rgba(22, 22, 22, 0.1);
+    --calendar-active-text: var(--white);
+    --calendar-disabled: var(--main-dark-text);
+        /* Column */
+    --column-bg: var(--white);
+    --column-text: var(--main-dark-text);
+    --column-icon: var(--main-dark-text);
+    --column-icon-hover: var(--light-violet);
+    /* Add Column button */
+    --add-column-bg: var(--white);
+    --add-column-text: var(--main-dark-text);
+    --add-column-hover: #9c9ddc;
+    --add-column-icon-bg: var(--violet);
+    --add-column-icon: var(--white);
+            /* Cards */
+    --card-bg: var(--white);
+    --card-text: var(--main-dark-text);
+    --card-icon: var(--main-dark-text);
+    --card-icon-hover: var(--light-violet);
+        /* Add card button */
+    --add-card-bg: var(--violet);
+    --add-card-text: var(--white);
+    --add-card-hover: #3c3e90;
+    --add-card-icon-bg: var(--white);
+    --add-card-icon: var(--main-dark-text);
+        /* Scroll */
+    --scroll-thumb: var(--light-violet);
+            /* Filter */
+    --filter-bg: #FCFCFC;
+    --filter-title: var(--main-dark-text);
+    --filter-border: #FCFCFC;
+    --filter-option: var(--main-dark-text);
+    --filter-icon: var(--main-dark-text);
+  }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-  
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+  }

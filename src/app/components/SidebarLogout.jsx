@@ -15,9 +15,9 @@ export default function LogoutButton() {
   return (
     <button
       onClick={handleLogout}
-      className="group flex items-center px-4 py-2 rounded-lg text-[var(--text)] bg-[var(--bg)]"
+      className="group flex items-center rounded-lg text-[var(--text)] bg-[var(--bg)] ml-[24px]"
     >
-      <AiOutlineLogin className="w-6 h-6 inline-block mr-2 text-[var(--active-board-bg)] group-hover:text-[var(--logOut-hover)]" />
+      <AiOutlineLogin className="w-6 h-6 inline-block mr-[14px] text-[var(--active-board-bg)] group-hover:text-[var(--logOut-hover)]" />
       Log Out
     </button>
   );

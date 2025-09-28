@@ -4,7 +4,7 @@ import React, { use } from "react";
 export default function AuthLayout({ children, activeTab }) {
   return (
     // Main container to center the form
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen p-[20px]">
       {/* Form container from Figma */}
       <div className="bg-[#151515] rounded-lg p-10 w-[424px]">
         {/* Tab-like navigation */}

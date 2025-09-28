@@ -10,12 +10,12 @@ export function NameField() {
                       <div>
                         <Field
                           type="text"
-                          name="name"
+                          name="username"
                           placeholder="Enter your name"
                           className={authInputStyles}
                           aria-label="Name"
                         />
-                        <ErrorMessage name="name" component="div" className="text-red-500 text-xs mt-1" />
+                        <ErrorMessage name="username" component="div" className="text-red-500 text-xs mt-1" />
                       </div>
     );
 }

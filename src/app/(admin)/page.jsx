@@ -1,27 +1,26 @@
 
 import Link from "next/link";
 import HeroIllustration from "@/assets/icons/hero-illustration.svg";
-
+import HeroIllustrationSM from "@/assets/icons/hero-illustration-sm.svg";
+import { BsFillLightningChargeFill } from "react-icons/bs";
 // This is the main page of the application, serving as a landing page
 export default function Home() {
   return (
-    <main className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
+    <main className="relative w-full min-h-screen flex items-center justify-center overflow-hidden p-[20px]">
       {/* main content block */}
-      <div className="relative z-10 w-[473px] h-[438px] flex flex-col items-center">
+      <div className="relative z-10 max-w-[473px] flex flex-col items-center">
 
         {/* Logo + Image */}
         <div className="flex flex-col items-center gap-6 mb-6">
-          <HeroIllustration className="w-[162px] h-[162px]" />
-          
+          <HeroIllustration className="w-[162px] h-[162px] hidden md:block"/>
+          <HeroIllustrationSM className="w-[124px] h-[124px] md:hidden"/>
           <div className="flex items-center gap-3">
             {/* Lightning Icon Box */}
-            <div className="w-12 h-12 rounded-lg bg-[#161616] flex items-center justify-center">    
-                      <svg className="w-4.5 h-6 fill-white text-white">
-          <use href="/sprite.svg#icon-lightning" />
-        </svg> 
+            <div className="md:w-[48px] md:h-[48px] w-[40px] h-[40px] rounded-lg bg-[#161616] flex items-center justify-center">
+              <BsFillLightningChargeFill className="md:w-[18px] md:h-[24px] w-[15px] h-[20px] fill-white text-white" />
             </div>
             {/* Title */}
-            <h1 className="text-[40px] leading-[60px] font-semibold tracking-[-0.04em] text-[#161616] font-poppins">
+            <h1 className="text-[28px] md:text-[40px] font-semibold tracking-[-0.04em] text-[#161616] font-poppins">
               Task Pro
             </h1>
           </div>
@@ -35,7 +34,7 @@ export default function Home() {
         {/* Register button */}
         <Link
           href="/register"
-          className="w-[344px] h-[49px] bg-[#161616] rounded-lg flex items-center justify-center text-white text-[14px] font-medium tracking-[-0.02em] hover:opacity-90 transition mb-4"
+          className="w-full max-w-[344px] h-[49px] bg-[#161616] rounded-lg text-center flex items-center justify-center text-white text-[14px] font-medium hover:opacity-90 transition mb-4"
         >
           Registration
         </Link>

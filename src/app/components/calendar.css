@@ -1,0 +1,161 @@
+/* General styles for the date picker root */
+.rdp {
+  --rdp-accent-color: var(--calendar-active);
+  --rdp-background-color: var(--calendar-bg);
+  --rdp-accent-color-dark: var(--calendar-active);
+  --rdp-background-color-dark: var(--calendar-bg);
+  --rdp-outline: 2px solid var(--rdp-accent-color);
+  --rdp-outline-selected: 3px solid var(--rdp-accent-color);
+  --rdp-border-radius: 50%;
+  margin: 1em;
+}
+
+/* Styles for the main container */
+.rdp-root {
+  position: relative;
+  background-color: var(--calendar-bg);
+  border: 1px solid var(--modal-input-border);
+  border-radius: 0.5rem;
+  color: var(--calendar-text);
+  font-family: 'Poppins', sans-serif;
+  width: 233px;
+}
+
+.rdp-month{
+    position: relative;
+    margin: 18px;
+}
+
+/* Styles for the caption (month and year) */
+.rdp-month_caption {
+    pointer-events: none;
+    height: 24px;
+    justify-content: center;
+    position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.rdp-caption_label {
+  font-size: 16px; /* 14px */
+  font-weight: 600;
+  color: var(--calendar-text);
+}
+
+/* Navigation buttons */
+.rdp-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rdp-button_previous,
+.rdp-button_next {
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px; /* full */
+  transition: background-color 0.2s;
+}
+
+.rdp-button_previous:hover,
+.rdp-button_next:hover {
+  background-color: var(--calendar-hover);
+  fill: var(--calendar-active);
+}
+
+.rdp-button_next,
+.rdp-button_previous {
+    position: absolute;
+    top: 0;
+    fill: var(--calendar-disabled);
+    opacity: 0.8;
+
+}
+
+.rdp-button_previous {
+    inset-inline-start: 0;
+}
+
+.rdp-button_next{
+    inset-inline-end: 0;
+}
+
+/* Table and cell styles */
+.rdp-month_grid {
+  width: 100%;
+}
+
+.rdp-weekdays {
+  display: flex;
+    justify-content: space-between;
+}
+
+.rdp-weekday {
+  width: 23px; /* 36px */
+  font-size: 14px; /* 12px */
+  font-weight: 600;
+  color: var(--calendar-disabled);
+  opacity: 0.5;
+}
+.rdp-week {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 11px;
+}
+
+.rdp-day {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px; /* 12px */
+  line-height: 18px; /* 18px */
+  height: 21px; /* 36px */
+  width: 23px; /* 36px */
+  padding: 0;
+  font-weight: 400;
+  border-radius: 9999px;
+  transition: background-color 0.2s;
+}
+
+.rdp-day:hover {
+  background-color: var(--calendar-hover);
+  color: var(--calendar-active);
+  cursor: pointer;
+}
+
+.rdp-today {
+  font-weight: 800;
+  color: var(--calendar-active);
+}
+
+.rdp-selected {
+  background-color: var(--calendar-active);
+  color: var(--calendar-active-text);
+  font-weight: 700;
+}
+
+.rdp-selected:hover {
+  background-color: var(--calendar-active);
+  color: var(--calendar-active-text);
+}
+
+.rdp-outside {
+  color: var(--calendar-disabled);
+  opacity: 0.5;
+}
+
+.rdp-disabled {
+  pointer-events: none;
+  color: var(--calendar-disabled);
+  opacity: 0.3;
+}
+.rdp-disabled:hover {
+    background-color: var(--calendar-disabled);
+    cursor: not-allowed;
+    opacity: 0.3;
+}

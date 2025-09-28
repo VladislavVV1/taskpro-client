@@ -8,10 +8,19 @@ export const useCardsStore = create(
       cards: [], // [{ id, title, description, priority, deadline }]
       isLoaded: false,
 
-      loadCards: () => {
-        if (get().isLoaded) return;
-        set({ cards: mockCards, isLoaded: true });
-      },
+        loadCards: (cards) => {
+          console.log('Loading cards...');
+          if (!cards) {
+            return;
+          }
+          const prevCards = get().cards;
+          // Check if any card already exists by id
+          const newCards = cards.filter(card => !prevCards.some(prev => prev.id === card.id));
+          if (newCards.length === 0) {
+            return; // All cards already exist
+          }
+          set({ cards: [...prevCards, ...newCards] });
+        },
 
       addCard: (card) =>
         set((s) => ({ cards: [...s.cards, card] })),

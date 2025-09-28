@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { mockDashboards } from '../mockData/storeMockData'; // Adjust the path as needed
+import { fetchBoardsFromServer } from '../lib/fetchBoardsFromServer'; // New import for fetching from server
 
 export const useBoardsStore = create(
   persist(
@@ -9,11 +10,18 @@ export const useBoardsStore = create(
       isLoaded: false,
       activeBoardId: null,
 
-      loadBoards: () => {
+      loadBoards: async () => {
         if (get().isLoaded) return;
         // first-time boot from mocks (persist keeps it later)
-        const boards = mockDashboards;
-        set({ boards, isLoaded: true, activeBoardId: boards[0]?.id ?? null });
+        const boards = await fetchBoardsFromServer();;
+        const parsedBoards = boards.map(board => ({
+          id: board.id.toString(),
+          name: board.name,
+          icon: board.icon,
+          background: board.background,
+          columns: Array.isArray(board.columns) ? board.columns.map(col => col.id.toString()) : []
+        }));
+        set({ boards: parsedBoards, isLoaded: true, activeBoardId: parsedBoards[0]?.id ?? null });
       },
 
       setActiveBoard: (id) => set({ activeBoardId: id }),

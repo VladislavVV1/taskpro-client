@@ -58,5 +58,4 @@ export const loadBoard = async (id) => {
   boardData.columns.map(column => {
     attachColumn(id, column.id.toString());
   });
-
 };
